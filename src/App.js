@@ -56,6 +56,34 @@ class App extends Component {
 
     return (
       <div className="app">
+        <div className="navbar">
+          <div className="leftside">
+              <a href="/">home</a>
+          </div>
+          <div className="rightside">
+            <a href="//localhost:9000/dashboard">dashboard</a>
+          </div>
+        </div>
+        
+        <div className="sidebar">
+          <h2>Kraj</h2>
+          <label><input type="checkbox" name="favorite_pet" value="Cats"></input>Murska Sobota</label>   
+          <label><input type="checkbox" name="favorite_pet" value="Dogs"></input>Maribor</label>         
+          <label><input type="checkbox" name="favorite_pet" value="Birds"></input>Ljubljana</label>      
+  
+          <h2>Tip</h2>
+          <label><input type="checkbox" name="favorite_pet" value="Cats"></input>1 sobno</label>   
+          <label><input type="checkbox" name="favorite_pet" value="Dogs"></input>2 sobno</label>         
+          <label><input type="checkbox" name="favorite_pet" value="Birds"></input>3 sobno</label>
+          <label><input type="checkbox" name="favorite_pet" value="Birds"></input>4 sobno</label>
+
+          <h2>Dodatno</h2>
+          <label><input type="checkbox" name="favorite_pet" value="Cats"></input>klima</label>   
+          <label><input type="checkbox" name="favorite_pet" value="Dogs"></input>parking</label>         
+          <label><input type="checkbox" name="favorite_pet" value="Birds"></input>balkon</label>
+        
+
+        </div>
         <div className="main">
           <div className="search">
             <input 
