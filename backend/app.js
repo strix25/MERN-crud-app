@@ -11,6 +11,8 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 
+
+
 //connect to MongoDB
 // mongoose.connect('mongodb://localhost:27017/EmployeeDB');
 // var db = mongoose.connection;
@@ -54,6 +56,7 @@ app.use(bodyparser.urlencoded({
   extended: true
 }));
 app.use(bodyparser.json());
+
 
 app.use(expressLayouts);
 app.use(logger('dev'));

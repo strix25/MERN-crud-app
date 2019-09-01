@@ -102,7 +102,7 @@ router.post('/register', function (req, res, next) {
 
 // GET route after registering
 router.get('/', function (req, res, next) {
-  console.log(req.session);
+  
   User.findById(req.session.userId)
     .exec(function (error, user) {
       if (error) {
@@ -111,7 +111,13 @@ router.get('/', function (req, res, next) {
         if (user === null) {
           return res.redirect('/dashboard/login');
         } else {
-          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="dashboard/logout">Logout</a>')
+          list = [
+            {"fullName": "drek", "email":"kek@mail.com", "mobile":"123", "city":"potato"},
+            {"fullName": "drek", "email":"kek@mail.com", "mobile":"123", "city":"potato"},
+            {"fullName": "drek", "email":"kek@mail.com", "mobile":"123", "city":"potato"}
+          ];
+          return res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:list});
+          // return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="dashboard/logout">Logout</a>')
         }
       }
     });
