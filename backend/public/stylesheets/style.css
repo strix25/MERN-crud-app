@@ -9,6 +9,10 @@ body {
   display: flex;
 }
 
+.container-fluid{
+  padding-top: 30px;
+}
+
 .app{
   display: flex;
   flex-wrap: wrap;
@@ -78,3 +82,11 @@ body {
 
 /* navbar end */
 
+/* login form */
+.form-signin{
+  margin: 0 auto;
+  width: 22%;
+}
+
+
+/* login form */
