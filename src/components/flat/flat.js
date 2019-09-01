@@ -18,9 +18,9 @@ export default class Flat extends Component {
           <div className="flat-picture" style={style}></div>
           <div className="title-container">
             <div className="flat-title">{title}</div>
-            <button className="btn-readmore" >
-              read more
-            </button>
+            <a href="//localhost:9000/odd/id" className="btn-readmore" rel="noopener noreferrer" target="_blank">
+              več
+            </a>
           </div>
           
         </div>
