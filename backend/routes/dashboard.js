@@ -102,17 +102,16 @@ router.post('/register', function (req, res, next) {
 
 // GET route after registering
 router.get('/', function (req, res, next) {
+  console.log(req.session);
   User.findById(req.session.userId)
     .exec(function (error, user) {
       if (error) {
         return next(error);
       } else {
         if (user === null) {
-          var err = new Error('Not authorized! Go back!');
-          err.status = 400;
-          return next(err);
+          return res.redirect('/dashboard/login');
         } else {
-          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="dashboard/logout">Logout</a>')
         }
       }
     });
@@ -124,12 +123,12 @@ router.get('/logout', function (req, res, next) {
     // delete session object
     req.session.destroy(function (err) {
       if (err) {
-        return next(err);
+        return res.redirect('/dashboard/login');
       } else {
-        return res.redirect('/');
+        return res.redirect('/dashboard/login');
       }
     });
-  }
+  }  
 });
 
 
