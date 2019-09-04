@@ -28,11 +28,9 @@ var UserSchema = new mongoose.Schema({
           {path: String}
         ]
       },
-      benefits: {
-        ac: Boolean,
-        parking: Boolean,
-        balcony: Boolean
-      },
+      ac: Boolean,
+      parking: Boolean,
+      balcony: Boolean,
       type: String,
       city: String,
       demandCount: Number

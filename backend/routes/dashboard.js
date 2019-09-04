@@ -12,8 +12,14 @@ var User = require('../models/user');
 //   res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:list});
 // });
 
-router.get('/newadd', function(req, res, next) {
-  res.render('newadd', {page:'newadd', menuId:'newadd'});
+router.get('/create', function(req, res, next) {
+  res.render('create', {page:'create', menuId:'create'});
+});
+
+router.post('/create', function(req, res, next) {
+  
+  console.log(req.body);
+  return res.redirect('/dashboard');
 });
 
 router.get('/register', function(req, res) {
