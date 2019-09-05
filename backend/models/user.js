@@ -27,7 +27,7 @@ var UserSchema = new mongoose.Schema({
       ac: Boolean,
       parking: Boolean,
       balcony: Boolean,
-      type: String,
+      apparType: String,
       city: String,
       demandCount: Number
     }

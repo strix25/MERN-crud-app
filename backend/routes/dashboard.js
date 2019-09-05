@@ -48,7 +48,7 @@ function insertAdd(req, res) {
   var add = {};
   add.name = req.body.name;
   add.body = req.body.description;
-  add.type = req.body.type;
+  add.apparType = req.body.apparType;
   add.city = req.body.city;
   add.demandCount = 0;
   add.mainPicture = req.files.mainpic[0].path.replace('public\\', '');
@@ -60,31 +60,21 @@ function insertAdd(req, res) {
     
   }
 
-  
-  console.log({add});
-  console.log("##################");
 
-  console.log(add.pictures);
-
- 
-  
-  // req.files.pictures;
-
-
-  // User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
-  //     if (!err) { res.redirect('employee/list'); }
-  //     else {
-  //         if (err.name == 'ValidationError') {
-  //             handleValidationError(err, req.body);
-  //             res.render("employee/addOrEdit", {
-  //                 viewTitle: 'Update Employee',
-  //                 employee: req.body
-  //             });
-  //         }
-  //         else
-  //             console.log('Error during record update : ' + err);
-  //     }
-  // });
+  User.findOneAndUpdate({ _id: req.body._id }, { $push: { ads: add } }, { new: true }, (err, doc) => {
+      if (!err) { 
+        
+        console.log("wtf");
+        
+      } else {
+          if (err.name == 'ValidationError') {
+              handleValidationError(err, req.body);
+              return res.redirect('/dashboard');
+          } else
+              console.log('Error during record update : ' + err);
+              
+      }
+  });
 }
 
 router.get('/register', function(req, res) {
@@ -186,7 +176,22 @@ router.get('/logout', function (req, res, next) {
 
 
 //FIXME:
-
+// function handleValidationError(err, body) {
+//   for (field in err.errors) {
+//       switch (err.errors[field].path) {
+//           case 'fullName':
+//               body['fullNameError'] = err.errors[field].message;
+//               break;
+//           case 'email':
+//               body['emailError'] = err.errors[field].message;
+//               break;
+//           default:
+//               body['nekaj'] = err.errors[field].message;
+//               break;
+//       }
+//   }
+//   console.log({body});
+// }
 //FIXME:
 
 module.exports = router;
