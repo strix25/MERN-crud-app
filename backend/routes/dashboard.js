@@ -53,13 +53,16 @@ function insertAdd(req, res) {
   add.demandCount = 0;
   add.mainPicture = req.files.mainpic[0].path.replace('public\\', '');
   add.pictures = [];
-  
+
   for (let i = 0; i < req.files.pictures.length; i++) {
     let tempPath = req.files.pictures[i].path.replace('public\\', '');
     add.pictures.push({'path': tempPath});
     
   }
 
+  if(req.body.ac){ add.ac = true; }
+  if(req.body.parking){ add.parking = true; }
+  if(req.body.balcony){ add.balcony = true;  }
 
   User.findOneAndUpdate({ _id: req.body._id }, { $push: { ads: add } }, { new: true }, (err, doc) => {
       if (!err) { 
