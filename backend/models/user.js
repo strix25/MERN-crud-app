@@ -22,12 +22,8 @@ var UserSchema = new mongoose.Schema({
     {
       name: String,
       body: String,
-      pictures: {
-        mainPicture: String,
-        gallery: [
-          {path: String}
-        ]
-      },
+      mainPicture: String,
+      pictures:[{path: String}],
       ac: Boolean,
       parking: Boolean,
       balcony: Boolean,

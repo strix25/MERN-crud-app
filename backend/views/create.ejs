@@ -3,7 +3,7 @@
   
   <h1 class="h3 mb-3 font-weight-normal">create</h1>
 
-  
+  <input type="hidden" name="_id" value="<%=userId%>">
   <label for="name" class="sr-only">naslov</label>
   <input type="text" style="margin-bottom:10px;" id="name" name="name" class="form-control" placeholder="naziv" required autofocus="">
 
@@ -31,7 +31,7 @@
   <label for="pictures" class="">Izberite glavno sliko</label>
   <input type="file" multiple style="margin-bottom:10px;" id="mainpic" name="mainpic" class="form-control" required>
 
-  <label for="pictures" class="">Izberite slike</label>
+  <label for="pictures" class="">Izberite slike za gelerijo</label>
   <input type="file" multiple style="margin-bottom:10px;" id="pictures" name="pictures" class="form-control">
 
   <button class="btn btn-lg btn-primary btn-block" type="submit">Ustvari oglas</button>

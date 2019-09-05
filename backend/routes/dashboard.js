@@ -2,10 +2,12 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 const multer = require('multer');
+var mongoose = require('mongoose');
 // const path = require('path');
 
 router.get('/create', function(req, res, next) {
-  res.render('create', {page:'create', menuId:'create'});
+  
+  res.render('create', {page:'create', menuId:'create', userId: req.session.userId});
 });
 
 // router.post('/create', function(req, res, next) {
@@ -33,12 +35,57 @@ var fields = [
 router.post('/create', upload.fields(fields), function (req, res) {
   //var imagePath = req.file.path.replace(/^public\//, '');
   console.log(req.body);
-  console.log(req.files);
+  insertAdd(req, res);
+
+  // console.log(req.files);
  //remove /public from imagePath TODO:
-  res.render(req.files);
-  // res.render('dashboard', {page:'dashobard', menuId:'dashboard'});
-  
+ 
+
+  return res.redirect('/dashboard');
 });
+
+function insertAdd(req, res) {
+  var add = {};
+  add.name = req.body.name;
+  add.body = req.body.description;
+  add.type = req.body.type;
+  add.city = req.body.city;
+  add.demandCount = 0;
+  add.mainPicture = req.files.mainpic[0].path.replace('public\\', '');
+  add.pictures = [];
+
+  for (let i = 0; i < req.files.pictures.length; i++) {
+    let tempPath = req.files.pictures[i].path.replace('public\\', '');
+    add.pictures.push({'path': tempPath});
+    
+  }
+
+  
+  console.log({add});
+  console.log("##################");
+
+  console.log(add.pictures);
+
+ 
+  
+  // req.files.pictures;
+
+
+  // User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
+  //     if (!err) { res.redirect('employee/list'); }
+  //     else {
+  //         if (err.name == 'ValidationError') {
+  //             handleValidationError(err, req.body);
+  //             res.render("employee/addOrEdit", {
+  //                 viewTitle: 'Update Employee',
+  //                 employee: req.body
+  //             });
+  //         }
+  //         else
+  //             console.log('Error during record update : ' + err);
+  //     }
+  // });
+}
 
 router.get('/register', function(req, res) {
   res.render('register', {page:'register', menuId:'register'});
