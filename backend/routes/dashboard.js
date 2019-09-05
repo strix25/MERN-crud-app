@@ -53,7 +53,7 @@ function insertAdd(req, res) {
   add.demandCount = 0;
   add.mainPicture = req.files.mainpic[0].path.replace('public\\', '');
   add.pictures = [];
-
+  
   for (let i = 0; i < req.files.pictures.length; i++) {
     let tempPath = req.files.pictures[i].path.replace('public\\', '');
     add.pictures.push({'path': tempPath});
@@ -64,7 +64,7 @@ function insertAdd(req, res) {
   User.findOneAndUpdate({ _id: req.body._id }, { $push: { ads: add } }, { new: true }, (err, doc) => {
       if (!err) { 
         
-        console.log("wtf");
+        console.log("inserted");
         
       } else {
           if (err.name == 'ValidationError') {
