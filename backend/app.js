@@ -2,7 +2,10 @@
 
 var createError = require('http-errors');
 var express = require('express');
+
 var path = require('path');
+var multer = require('multer');
+
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressLayouts = require('express-ejs-layouts');
@@ -39,9 +42,16 @@ var dashboardRouter = require('./routes/dashboard');
 
 var app = express();
 
+
+//FIXME:
+
+//FIXME:
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+
 
 app.use(session({
   secret: 'work hard',
@@ -57,6 +67,12 @@ app.use(bodyparser.urlencoded({
 }));
 app.use(bodyparser.json());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function (err, req, res, next) {
+  if (err instanceof multer.MulterError) res.status(500).send(err.message);
+  else next(err);
+});
 
 app.use(expressLayouts);
 app.use(logger('dev'));

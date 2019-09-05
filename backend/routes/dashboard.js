@@ -1,25 +1,43 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   list = [
-//     {"fullName": "drek", "email":"kek@mail.com", "mobile":"123", "city":"potato"},
-//     {"fullName": "drek", "email":"kek@mail.com", "mobile":"123", "city":"potato"},
-//     {"fullName": "drek", "email":"kek@mail.com", "mobile":"123", "city":"potato"}
-//   ];
-//   res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:list});
-// });
+const multer = require('multer');
+// const path = require('path');
 
 router.get('/create', function(req, res, next) {
   res.render('create', {page:'create', menuId:'create'});
 });
 
-router.post('/create', function(req, res, next) {
+// router.post('/create', function(req, res, next) {
   
+//   console.log(req.body);
+//   return res.redirect('/dashboard');
+// });
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  }
+});
+
+var upload = multer({ storage: storage });
+var fields = [
+  { name: 'mainpic', maxCount: 1 },
+  { name: 'pictures', maxCount: 6 }
+];
+
+// router.post('/create', upload.array('pictures',3), function (req, res) {
+router.post('/create', upload.fields(fields), function (req, res) {
+  //var imagePath = req.file.path.replace(/^public\//, '');
   console.log(req.body);
-  return res.redirect('/dashboard');
+  console.log(req.files);
+ //remove /public from imagePath TODO:
+  res.render(req.files);
+  // res.render('dashboard', {page:'dashobard', menuId:'dashboard'});
+  
 });
 
 router.get('/register', function(req, res) {
@@ -29,31 +47,6 @@ router.get('/register', function(req, res) {
 router.get('/login', function(req, res) {
   res.render('login', {page:'login', menuId:'login'});
 });
-
-// // // router.post('/register', function(req, res) {
-// // //   console.log(req.body);
-// // //   res.render('register', {page:'register', menuId:'register'});
-  
-
-// // //   // var username = req.body.username;
-// // //   // var password = req.body.password;
-// // //   // var firstname = req.body.firstname;
-// // //   // var lastname = req.body.lastname;
-
-// // //   // var newuser = new User();
-// // //   // newuser.username = username;
-// // //   // newuser.password = password;
-// // //   // newuser.firstname = firstname;
-// // //   // newuser.lastname = lastname;
-// // //   // newuser.save(function(err, savedUser){
-// // //   //   if (err) {
-// // //   //     console.log(err);
-// // //   //     return res.status(500).send();
-// // //   //   }
-
-// // //   //   return res.status(200).send();
-// // //   // })
-// // // });
 
 
 //POST route for updating data
@@ -144,5 +137,9 @@ router.get('/logout', function (req, res, next) {
 });
 
 
+
+//FIXME:
+
+//FIXME:
 
 module.exports = router;
