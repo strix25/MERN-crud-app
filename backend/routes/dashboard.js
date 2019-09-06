@@ -223,44 +223,12 @@ router.get('/delete/:id', (req, res) => {
 
 
 router.get('/edit/:id', (req, res) => {
-
-  // User.findByIdAndUpdate({ _id: req.session.userId }, { $pull: { ads: { _id: req.params.id }} }, {'new': true}, (err) => {
-  //   if(!err){
-  //     console.log("dela");
-  //     res.redirect("/dashboard");
-  //   }else{
-  //     console.log(err);
-  //     res.redirect("/dashboard");
-  //   }
-  // } );
-
-  // //TODO:
-  // User.findOne({_id:req.session.userId },(err, user) => {
-  //   if (!err) {
-  //     // console.log(user);
-  //     let ads = user.ads;
-  //     return res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:ads});
-  //   }
-  //   else {
-  //     console.log('Error in retrieving employee list :' + err);
-  //   }
-  // });
-
-  // User.findOne({_id:req.user.id, "ads._id": req.params.id},{"ads.$": 1}, (err, result) => { 
-  //   if(!err){
-  //     console.log({result});
-  //     return res.render('edit', {page:'edit', menuId:'edit', item:result});
-  //   }else{
-  //     console.log(err);
-  //   }
-  // });
   
   User.findById(req.session.userId, function (error,response) {
     
-    
     if(!error){
-      // console.log(response.ads.id(req.params.id));
       let add = response.ads.id(req.params.id)
+
       return res.render('edit', {page:'edit', menuId:'edit', item:add});
     }else{
       console.log(error);
@@ -268,6 +236,21 @@ router.get('/edit/:id', (req, res) => {
     
   });
 });
+
+// router.post('/edit/:id', (req, res) => {
+  
+//   User.findById(req.session.userId, function (error,response) {
+    
+//     if(!error){
+//       let add = response.ads.id(req.params.id)
+
+//       return res.render('edit', {page:'edit', menuId:'edit', item:add});
+//     }else{
+//       console.log(error);
+//     }
+    
+//   });
+// });
 
 
 

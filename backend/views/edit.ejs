@@ -33,6 +33,11 @@
 
   <label for="pictures" class="">Izberite slike za gelerijo</label>
   <input type="file" multiple style="margin-bottom:10px;" id="pictures" name="pictures" class="form-control" required>
+  
+  <% for(var j=0; j < item.pictures.length; j++) { %>
+    <%console.log(item.pictures[j].path);%>
+    <img src="//localhost:9000/<%=item.pictures[j].path.replace('\\', '/')%>" alt="" style="width:190px;">
+  <%}%>
 
   <button class="btn btn-lg btn-primary btn-block" type="submit">Posodobi oglas</button>
 </form>
