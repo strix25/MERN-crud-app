@@ -11,9 +11,20 @@
  
   <textarea name="description" style="margin-bottom:10px;" id="description" cols="30" rows="10" class="form-control" placeholder="opis"></textarea>
 
-  <label for="city" class="sr-only">kraj</label>
-  <input type="text" style="margin-bottom:10px;" id="city" name="city" class="form-control" placeholder="kraj" required autofocus="">
-  
+  <label for="city" class="sr-only">regija</label>
+  <select name="city" id="city" style="margin-bottom:10px;">
+    <option value="Notranjska">Notranjska</option>
+    <option value="Podravska">Podravska</option>
+    <option value="Pomurska">Pomurska</option>
+    <option value="Gorenjska">Gorenjska</option>
+    <option value="Primorska">Primorska</option>
+    <option value="Savinjska">Savinjska</option>
+    <option value="Koroška">Koroška</option>
+    <option value="Dolenjska">Dolenjska</option>
+    <option value="Posavska">Posavska</option>
+    <option value="Zasavska">Zasavska</option>
+  </select>
+
   <select name="apparType">
     <option value="1">1 sobno</option>
     <option value="2">2 sobno</option>
