@@ -1,38 +1,38 @@
-<h3>this is create</h3>
-<form class="form-signin" method="POST" action="/dashboard/edit/<%=req.params.id%>" enctype="multipart/form-data">
+<h3>this is edit</h3>
+<form class="form-signin" method="POST" action="/dashboard/edit/<%=item._id%>" enctype="multipart/form-data">
   
-  <h1 class="h3 mb-3 font-weight-normal">update</h1>
+  <h1 class="h3 mb-3 font-weight-normal">edit</h1>
 
-  <input type="hidden" name="_id" value="<%=userId%>">
+
   <label for="name" class="sr-only">naslov</label>
-  <input type="text" style="margin-bottom:10px;" id="name" name="name" class="form-control" placeholder="naziv" required autofocus="">
+  <input type="text" style="margin-bottom:10px;" id="name" name="name" class="form-control" value="<%=item.name%>" placeholder="naziv" required autofocus="">
 
   <label for="description" class="sr-only">opis</label>
  
-  <textarea name="description" style="margin-bottom:10px;" id="description" cols="30" rows="10" class="form-control" placeholder="opis"></textarea>
+  <textarea name="description" style="margin-bottom:10px;" id="description" cols="30" rows="10" class="form-control" placeholder="opis"><%=item.body%></textarea>
 
   <label for="city" class="sr-only">kraj</label>
-  <input type="text" style="margin-bottom:10px;" id="city" name="city" class="form-control" placeholder="kraj" required autofocus="">
+  <input type="text" style="margin-bottom:10px;" id="city" name="city" value="<%=item.city%>" class="form-control" placeholder="kraj" required autofocus="">
   
-  <select name="apparType">
-    <option value="1">1 sobno</option>
-    <option value="2">2 sobno</option>
-    <option value="3">3 sobno</option>
-    <option value="4">4 sobno</option>
+  <select name="apparType" id="apparType" >
+    <% for(var i=1; i < 5; i++) { %>
+    <option value="<%=i%>" <%if(item.apparType==i){%> selected <%}%> ><%=i%> sobno</option>
+    <%}%>
   </select>
 
-  <div class="checkbox mb-3">
-    <input type="checkbox" name="ac" value="1"> Klima<br>
-    <input type="checkbox" name="parking" value="1"> Park plac<br>
-    <input type="checkbox" name="balcony" value="1"> Balkon<br>
+  <div class="checkbox mb-3" >
+    <input type="checkbox" name="ac" value="1" <%if(item.ac){%> checked <%}%> > Klima<br>
+    <input type="checkbox" name="parking" value="1" <%if(item.parking){%> checked <%}%>> Park plac<br>
+    <input type="checkbox" name="balcony" value="1" <%if(item.balcony){%> checked <%}%>> Balkon<br>
   </div>
 
   
   <label for="pictures" class="">Izberite glavno sliko</label>
   <input type="file" multiple style="margin-bottom:10px;" id="mainpic" name="mainpic" class="form-control" required>
+  <img src="//localhost:9000/<%=item.mainPicture%>" alt="" style="height: 190px;">
 
   <label for="pictures" class="">Izberite slike za gelerijo</label>
   <input type="file" multiple style="margin-bottom:10px;" id="pictures" name="pictures" class="form-control" required>
 
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Ustvari oglas</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Posodobi oglas</button>
 </form>
