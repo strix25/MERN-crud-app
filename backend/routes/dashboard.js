@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 const multer = require('multer');
 var mongoose = require('mongoose');
+var ObjectId = require('mongodb').ObjectID;
 // const path = require('path');
 
 router.get('/create', function(req, res, next) {
@@ -34,7 +35,7 @@ var fields = [
 // router.post('/create', upload.array('pictures',3), function (req, res) {
 router.post('/create', upload.fields(fields), function (req, res) {
   //var imagePath = req.file.path.replace(/^public\//, '');
-  console.log(req.body);
+  // console.log(req.body);
   insertAdd(req, res);
 
   // console.log(req.files);
@@ -150,16 +151,11 @@ router.get('/', function (req, res, next) {
         if (user === null) {
           return res.redirect('/dashboard/login');
         } else {
-          list = [
-            {"fullName": "drek", "email":"kek@mail.com", "mobile":"123", "city":"potato"},
-            {"fullName": "drek", "email":"kek@mail.com", "mobile":"123", "city":"potato"},
-            {"fullName": "drek", "email":"kek@mail.com", "mobile":"123", "city":"potato"}
-          ];
 
           //FIXME:
           User.findOne({_id:req.session.userId },(err, user) => {
             if (!err) {
-              console.log(user);
+              // console.log(user);
               let ads = user.ads;
               return res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:ads});
             }
@@ -210,5 +206,27 @@ router.get('/logout', function (req, res, next) {
 //   console.log({body});
 // }
 //FIXME:
+
+router.get('/delete/:id', (req, res) => {
+  
+
+  
+  // let postid = new ObjectId(req.params.id);
+  console.log("######################");
+  
+  
+  User.findByIdAndUpdate({ _id: req.session.userId }, { $pull: { ads: { _id: req.params.id }} }, {'new': true}, (err) => {
+    if(!err){
+      console.log("dela");
+      res.redirect("/dashboard");
+    }else{
+      console.log(err);
+      console.log("ne dela");
+      res.redirect("/dashboard");
+    }
+  } );
+  
+  
+});
 
 module.exports = router;
