@@ -155,8 +155,22 @@ router.get('/', function (req, res, next) {
             {"fullName": "drek", "email":"kek@mail.com", "mobile":"123", "city":"potato"},
             {"fullName": "drek", "email":"kek@mail.com", "mobile":"123", "city":"potato"}
           ];
-          return res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:list});
-          // return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="dashboard/logout">Logout</a>')
+
+          //FIXME:
+          User.findOne({_id:req.session.userId },(err, user) => {
+            if (!err) {
+              console.log(user);
+              let ads = user.ads;
+              return res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:ads});
+            }
+            else {
+              console.log('Error in retrieving employee list :' + err);
+            }
+        });
+          //FIXME:
+
+          // return res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:list});
+          console.log("shiet");
         }
       }
     });

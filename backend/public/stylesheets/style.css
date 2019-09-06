@@ -90,3 +90,9 @@ body {
 
 
 /* login form */
+
+.ads-list{
+  margin-left: auto;
+  margin-right: auto;
+  width:30vw;
+}
