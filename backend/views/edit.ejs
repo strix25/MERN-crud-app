@@ -1,8 +1,9 @@
 <%
 var regions = ["Notranjska","Podravska","Pomurska","Gorenjska","Primorska","Savinjska","Koroška","Dolenjska","Posavska","Zasavska"];
+
 %>
 <h3>this is edit</h3>
-<form class="form-signin" method="POST" action="/dashboard/edit/<%=item._id%>" enctype="multipart/form-data">
+<form class="form-signin" method="POST" action="/dashboard/edit/<%=String(item._id)%>" enctype="multipart/form-data">
   
   <h1 class="h3 mb-3 font-weight-normal">edit</h1>
 
@@ -17,10 +18,10 @@ var regions = ["Notranjska","Podravska","Pomurska","Gorenjska","Primorska","Savi
   
 
   <select name="city" id="city" style="margin-bottom:10px;" value="<%=item.city%>">
-      <% for(var h=0; h < regions.length; h++) { %>
-      <option value="<%=regions[h]%>" <%if(item.city === regions[h]){%> selected <%}%> ><%=regions[h]%></option>
-      <%}%>
-    </select>
+    <% for(var h=0; h < regions.length; h++) { %>
+    <option value="<%=regions[h]%>" <%if(item.city === regions[h]){%> selected <%}%> ><%=regions[h]%></option>
+    <%}%>
+  </select>
   
   <select name="apparType" id="apparType" >
     <% for(var i=1; i < 5; i++) { %>
@@ -36,11 +37,11 @@ var regions = ["Notranjska","Podravska","Pomurska","Gorenjska","Primorska","Savi
 
   
   <label for="pictures" class="">Izberite glavno sliko</label>
-  <input type="file" multiple style="margin-bottom:10px;" id="mainpic" name="mainpic" class="form-control" required>
+  <input type="file" multiple style="margin-bottom:10px;" id="mainpic" name="mainpic" class="form-control" >
   <img src="//localhost:9000/<%=item.mainPicture%>" alt="" style="height: 190px;">
 
   <label for="pictures" class="">Izberite slike za gelerijo</label>
-  <input type="file" multiple style="margin-bottom:10px;" id="pictures" name="pictures" class="form-control" required>
+  <input type="file" multiple style="margin-bottom:10px;" id="pictures" name="pictures" class="form-control" >
   
   <% for(var j=0; j < item.pictures.length; j++) { %>
     <%console.log(item.pictures[j].path);%>
