@@ -20,10 +20,7 @@ router.get('/list', function(req, res, next) {
         }
       }
 
-      
 
-
-      console.log(finalArr);
       res.json({
         "status":"Ok",
         "data": finalArr
@@ -41,8 +38,24 @@ router.get('/list', function(req, res, next) {
   
 });
 
-router.get('/apartment', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/apartment/:userid/:postid', function(req, res, next) {
+  User.findOne(
+    { "_id": req.params.userid },
+    (err, doc) => {
+      if (!err) { 
+        var add = doc.ads.id(req.params.postid);
+        res.json({
+          "status": "ok",
+          "data": add
+        });
+
+        console.log("ok");
+ 
+      } else {
+        console.log('Error during record update : ' + err);
+      }
+    }
+  );
 });
 
 
