@@ -6,10 +6,12 @@ export default class Flat extends Component {
     this.props.selectFlat(this.props.flat);
   }
   render() {
-    const title = this.props.flat.price + this.props.flat.priceCurrency + " - " + this.props.flat.name;
+    const title = this.props.flat.price + "EUR" + " - " + this.props.flat.name;
+    console.log(this.props.flat);
 
+    const imgPath = this.props.flat.mainPicture.replace("\\", "/");
     const style = {
-      backgroundImage: `url('${this.props.flat.imageUrl}')`
+      backgroundImage: `url('//localhost:9000/${imgPath}')`
     };
 
     return (

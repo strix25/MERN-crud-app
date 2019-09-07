@@ -50,6 +50,8 @@ function insertAdd(req, res) {
   add.name = req.body.name;
   add.body = req.body.description;
   add.price = req.body.price;
+  add.lat = req.body.lat;
+  add.lng = req.body.lng;
   add.apparType = req.body.apparType;
   add.city = req.body.city;
   add.demandCount = 0;
@@ -248,6 +250,8 @@ router.post('/edit/:id',upload.fields(fields), (req, res) => {
   add.name = req.body.name;
   add.body = req.body.description;
   add.price = req.body.price;
+  add.lat = req.body.lat;
+  add.lng = req.body.lng;
   add.apparType = req.body.apparType;
   add.city = req.body.city;
   
@@ -277,6 +281,8 @@ router.post('/edit/:id',upload.fields(fields), (req, res) => {
         doc.ads.id(req.params.id).name = add.name;
         doc.ads.id(req.params.id).body = add.body;
         doc.ads.id(req.params.id).price = add.price;
+        doc.ads.id(req.params.id).lat = add.lat;
+        doc.ads.id(req.params.id).lng = add.lng;
         doc.ads.id(req.params.id).apparType = add.apparType;
         doc.ads.id(req.params.id).city = add.city;
         doc.ads.id(req.params.id).ac = add.ac;

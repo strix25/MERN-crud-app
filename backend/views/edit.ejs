@@ -14,6 +14,12 @@ var regions = ["Notranjska","Podravska","Pomurska","Gorenjska","Primorska","Savi
   <label for="price" class="sr-only">Cena</label>
   <input type="number" style="margin-bottom:10px;" id="price" name="price" class="form-control" placeholder="Cena" value="<%=item.price%>" required autofocus="">
 
+  <label for="lat" class="sr-only">lat</label>
+  <input type="text" style="margin-bottom:10px;" id="lat" name="lat" class="form-control" placeholder="lat" value="<%=item.lat%>" required autofocus="">
+
+  <label for="lng" class="sr-only">lng</label>
+  <input type="text" style="margin-bottom:10px;" id="lng" name="lng" class="form-control" placeholder="lng" value="<%=item.lng%>" required autofocus="">
+
   <label for="description" class="sr-only">opis</label>
   <textarea name="description" style="margin-bottom:10px;" id="description" cols="30" rows="10" class="form-control" placeholder="opis"><%=item.body%></textarea>
 

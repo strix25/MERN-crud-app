@@ -16,13 +16,15 @@ class App extends Component {
   }
 
   componentDidMount(){
-    const url = "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/flats.json";
+    const url = "//localhost:9000/api/list";
+    // const url = "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/flats.json";
     fetch(url)
       .then(response => response.json())
       .then((data) =>{
+        console.log(data);
         this.setState({
-          flats: data,
-          allFlats: data
+          flats: data.data,
+          allFlats: data.data
         });
       })
   }
@@ -95,7 +97,7 @@ class App extends Component {
           <div className="flats">
             {this.state.flats.map((flat) => {
               return <Flat 
-              key={flat.name} 
+              key={flat._id} 
               flat={flat}
               selectFlat = {this.selectFlat} />
             })}
