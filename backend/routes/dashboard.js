@@ -242,18 +242,12 @@ router.get('/edit/:id', (req, res) => {
 
 router.post('/edit/:id',upload.fields(fields), (req, res) => {
 
-
-  //FIXME:
-
-  console.log("#######");
-  console.log(req.body);
-  console.log("########");
   var add = {};
   add.name = req.body.name;
   add.body = req.body.description;
   add.apparType = req.body.apparType;
   add.city = req.body.city;
-  // add.demandCount = 0;
+  
   if (req.files.mainpic != undefined) {
     add.mainPicture = req.files.mainpic[0].path.replace('public\\', '');
   }
@@ -271,27 +265,7 @@ router.post('/edit/:id',upload.fields(fields), (req, res) => {
   if(req.body.parking){ add.parking = true; } else { add.parking = false; }
   if(req.body.balcony){ add.balcony = true;  } else { add.balcony = false; }
 
-  // User.findOneAndUpdate({
-  //   "_id": req.session.userId,
-  //   "array1": {
-  //     "$elemMatch": {
-  //       "_id": req.params.id
-  //     }
-  //   }
-  // }, { $set: { name: add.name } }, { new: true }, (err, doc) => {
-  //     if (!err) { 
-        
-  //       console.log("inserted");
-        
-  //     } else {
-  //         if (err.name == 'ValidationError') {
-  //             handleValidationError(err, req.body);
-  //             return res.redirect('/dashboard');
-  //         } else
-  //             console.log('Error during record update : ' + err);
-              
-  //     }
-  // });
+  
   //TODO:
   // User.findOneAndUpdate(
   //   {
@@ -303,38 +277,44 @@ router.post('/edit/:id',upload.fields(fields), (req, res) => {
   //     }
   //   },
   //   {
-  //     "$push": { "ads.$[outer].name": "reeeeee" }
+  //     "$push": { "ads.id(req.params.id).name": "reeeeee" },
+  //     new: true
   //   },
-  //   {
-  //     "arrayFilters": [{ "outer._id": "req.params.id" }] 
-  //   },
+   
   //   (err, doc) => {
   //     if (!err) { 
+  //       doc.ads.id(req.params.id).name = add.name;
+  //       doc.ads.id(req.params.id).body = add.body;
+  //       doc.ads.id(req.params.id).apparType = add.apparType;
+  //       doc.ads.id(req.params.id).city = add.city;
+  //       doc.ads.id(req.params.id).ac = add.ac;
+  //       doc.ads.id(req.params.id).parking = add.parking;
+  //       doc.ads.id(req.params.id).balcony = add.balcony;
+
+  //       if(add.mainPicture != undefined){
+  //         doc.ads.id(req.params.id).mainPicture = add.mainPicture;
+  //       }
+  //       if(add.pictures != undefined){
+  //         doc.ads.id(req.params.id).pictures = add.pictures;
+  //       }
+        
+        
+
+  //       doc.save(function(err, newDoc){ console.log(newDoc); });
+
   //       console.log("inserted");
-  //       console.log(doc);
+ 
   //     } else {
-          
-  //         console.log('Error during record update : ' + err);
-          
-            
+  //       console.log('Error during record update : ' + err);
   //     }
   //   }
   // );
   //TODO:
+
+  //FIXME:
   User.findOneAndUpdate(
-    {
-      "_id": req.session.userId,
-      "ads": {
-        "$elemMatch": {
-          "_id": req.params.id
-        }
-      }
-    },
-    {
-      "$push": { "ads.id(req.params.id).name": "reeeeee" },
-      new: true
-    },
-   
+    { "_id": req.session.userId },
+    { new: true },
     (err, doc) => {
       if (!err) { 
         doc.ads.id(req.params.id).name = add.name;
@@ -350,41 +330,21 @@ router.post('/edit/:id',upload.fields(fields), (req, res) => {
         }
         if(add.pictures != undefined){
           doc.ads.id(req.params.id).pictures = add.pictures;
-        }
-        
-        
+        } 
 
-        doc.save(function(err, newDoc){
-          console.log("shranjenooooooooooooooooo");
-          
-          console.log(newDoc);
-        });
+        doc.save(function(err, newDoc){ console.log(newDoc); });
+
         console.log("inserted");
-        console.log("$$$$$$$$$$$");
-        console.log(doc.ads.id(req.params.id));
-        console.log("$$$$$$$$$$$");
+ 
       } else {
-          
-          console.log('Error during record update : ' + err);
-          
-            
+        console.log('Error during record update : ' + err);
       }
     }
   );
-  //FIXME:
+  //FIXME: 
 
   res.redirect('/dashboard');
-  // User.findById(req.session.userId, function (error,response) {
-    
-  //   if(!error){
-  //     let add = response.ads.id(req.params.id)
-
-  //     return res.render('edit', {page:'edit', menuId:'edit', item:add});
-  //   }else{
-  //     console.log(error);
-  //   }
-    
-  // });
+ 
 });
 
 
