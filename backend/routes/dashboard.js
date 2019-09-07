@@ -52,6 +52,7 @@ function insertAdd(req, res) {
   add.apparType = req.body.apparType;
   add.city = req.body.city;
   add.demandCount = 0;
+  add.userid = req.session.userId;
   add.mainPicture = req.files.mainpic[0].path.replace('public\\', '');
   add.pictures = [];
 
@@ -265,53 +266,7 @@ router.post('/edit/:id',upload.fields(fields), (req, res) => {
   if(req.body.parking){ add.parking = true; } else { add.parking = false; }
   if(req.body.balcony){ add.balcony = true;  } else { add.balcony = false; }
 
-  
-  //TODO:
-  // User.findOneAndUpdate(
-  //   {
-  //     "_id": req.session.userId,
-  //     "ads": {
-  //       "$elemMatch": {
-  //         "_id": req.params.id
-  //       }
-  //     }
-  //   },
-  //   {
-  //     "$push": { "ads.id(req.params.id).name": "reeeeee" },
-  //     new: true
-  //   },
-   
-  //   (err, doc) => {
-  //     if (!err) { 
-  //       doc.ads.id(req.params.id).name = add.name;
-  //       doc.ads.id(req.params.id).body = add.body;
-  //       doc.ads.id(req.params.id).apparType = add.apparType;
-  //       doc.ads.id(req.params.id).city = add.city;
-  //       doc.ads.id(req.params.id).ac = add.ac;
-  //       doc.ads.id(req.params.id).parking = add.parking;
-  //       doc.ads.id(req.params.id).balcony = add.balcony;
 
-  //       if(add.mainPicture != undefined){
-  //         doc.ads.id(req.params.id).mainPicture = add.mainPicture;
-  //       }
-  //       if(add.pictures != undefined){
-  //         doc.ads.id(req.params.id).pictures = add.pictures;
-  //       }
-        
-        
-
-  //       doc.save(function(err, newDoc){ console.log(newDoc); });
-
-  //       console.log("inserted");
- 
-  //     } else {
-  //       console.log('Error during record update : ' + err);
-  //     }
-  //   }
-  // );
-  //TODO:
-
-  //FIXME:
   User.findOneAndUpdate(
     { "_id": req.session.userId },
     { new: true },
@@ -341,7 +296,7 @@ router.post('/edit/:id',upload.fields(fields), (req, res) => {
       }
     }
   );
-  //FIXME: 
+  
 
   res.redirect('/dashboard');
  

@@ -29,7 +29,8 @@ var UserSchema = new mongoose.Schema({
       balcony: Boolean,
       apparType: String,
       city: String,
-      demandCount: Number
+      demandCount: Number,
+      userid: String
     }
   ]
 });
