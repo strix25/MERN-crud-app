@@ -14,7 +14,6 @@ router.get('/list', function(req, res, next) {
         if(user[i].ads != undefined && user[i].ads.length > 0){
           for (let j = 0; j < user[i].ads.length; j++) {
             user[i].ads[j].userid = user[i]._id;
-            console.log(user[i].ads[j].userid);
             finalArr.push(user[i].ads[j]);
           }
         }
