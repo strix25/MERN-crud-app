@@ -3,6 +3,7 @@
   flex-basis: calc(50% - 20px);
   margin: 10px;
   cursor: pointer;
+  
 }
 .flat:hover{
   opacity: 0.9;
@@ -11,11 +12,13 @@
   height: 200px;
   background-size: cover;
   background-position: center;
+  border-radius: 10px;
 }
 .flat-title{
   margin-top:10px;
   font-weight: bold;
   display: inline-block;
+  margin-left: 4px;
 }
 
 .btn-readmore{
@@ -26,4 +29,20 @@
 .title-container{
   display:flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.title-container a{
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  height: 18px;
+  padding: 5px;
+  width: 50px;
+  text-align: center;
+  border-radius: 18px;
+}
+
+.title-container a:hover{
+  background: #2e93ff;
 }

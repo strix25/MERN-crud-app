@@ -1,5 +1,5 @@
 body{
-  background: #181818ed;
+  background: #fff;
 }
 .app{
   display: flex;
@@ -20,6 +20,8 @@ body{
   font-size: 24px;
   color: #999;
   padding-left: 5px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
 }
 .map{
   flex-grow: 1;
@@ -46,9 +48,21 @@ body{
 /* navbar start */
 .navbar{
   height: 5vh;
-  background:gray;
+  background:#007bff;
   width:100%;
   padding: 0 50px 0;
+  color: #fff;
+}
+
+.navbar a{
+  color:#fff;
+  text-decoration: none;
+}
+
+.navbar .leftside .fa{
+  font-size:21px;
+  margin-bottom:2px;
+  margin-right:4px;
 }
 
 .leftside{
@@ -56,6 +70,7 @@ body{
   display: flex;
   align-items: center;
   height: 100%;
+  letter-spacing: 1px;
 }
 
 .rightside{
@@ -67,3 +82,6 @@ body{
 
 /* navbar end */
 
+.sidebar input[type=checkbox] {
+  margin-right:6px;
+}

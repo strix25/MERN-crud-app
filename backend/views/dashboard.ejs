@@ -1,13 +1,4 @@
-<h2>welcome to dashboard</h2>
-
-<!-- <ul>
-  <li>
-    <h2>Naziv</h2>
-    <img src="" alt="">
-    <a href="/edit/id">Uredi</a>
-    <a href="/delete/id">Izbriši</a>
-  </li>
-</ul> -->
+<h2>Moji oglasi</h2>
 
 <table class="table table-striped ads-list">
     <thead>
@@ -31,3 +22,8 @@
         <%});%>
     </tbody>
 </table>
+
+<%if(list.length < 1){%>
+  <h5>Trenutno nimate nobenega oglasa.</h5>
+  <a href="/dashboard/create" class="create-btn">Dodaj nov oglas</a>
+<%}%>

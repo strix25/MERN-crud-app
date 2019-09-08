@@ -58,7 +58,7 @@ class App extends Component {
       <div className="app">
         <div className="navbar">
           <div className="leftside">
-              <a href="/">home</a>
+            <i class="fa fa-home" ></i><a href="/">Stanovanja</a>
           </div>
           <div className="rightside">
             <a href="//localhost:9000/dashboard">dashboard</a>

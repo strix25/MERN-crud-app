@@ -17,15 +17,6 @@ var MongoStore = require('connect-mongo')(session);
 var cors = require('cors');
 
 
-//connect to MongoDB
-// mongoose.connect('mongodb://localhost:27017/EmployeeDB');
-// var db = mongoose.connection;
-
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function () {
-//   console.log("connected boii");
-// });
-
 //FIXME:
 mongoose.connect('mongodb://localhost:27017/EmployeeDB', { useNewUrlParser: true ,useFindAndModify: false, useCreateIndex: true}, (err) => {
     if (!err) { console.log('MongoDB Connection Succeeded.') }
@@ -35,7 +26,7 @@ var db = mongoose.connection;
 //FIXME:
 
 var bodyparser = require('body-parser');
-// var employeeController = require('./controllers/employeeController');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
