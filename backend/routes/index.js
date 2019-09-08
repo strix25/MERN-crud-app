@@ -48,15 +48,14 @@ router.post('/send-email', function (req, res) {
   
   
    incDemandCount(req.body.userid, req.body.postid, function(mail){
-    console.log("callback was caleed");
-    console.log({mail});
+    console.log("callback was called");
    
     let mailOptions = {
       to: mail,
       subject: mSubject,
       text: mBody
     };
-    
+
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             return console.log(error);
