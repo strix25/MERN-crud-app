@@ -21,7 +21,7 @@ class App extends Component {
     fetch(url)
       .then(response => response.json())
       .then((data) =>{
-        console.log(data);
+        // console.log(data);
         this.setState({
           flats: data.data,
           allFlats: data.data
@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   selectFlat = (flat) => {
-    console.log(flat);
+    //FIXME: tu mogoce
     this.setState({
       selectedFlat: flat
     });
@@ -51,8 +51,8 @@ class App extends Component {
 
     if(this.state.selectedFlat){
       center = {
-        lat: this.state.selectedFlat.lat,
-        lng: this.state.selectedFlat.lng,
+        lat: Number(this.state.selectedFlat.lat),
+        lng: Number(this.state.selectedFlat.lng),
       }
     }
 
