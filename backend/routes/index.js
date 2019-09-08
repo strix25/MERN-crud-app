@@ -31,6 +31,7 @@ router.get('/apartment/:userid/:postid', function(req, res, next) {
 });
 
 router.post('/send-email', function (req, res) {
+
   let transporter = nodeMailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
@@ -41,22 +42,55 @@ router.post('/send-email', function (req, res) {
           pass: 'diplomadamjan123'
       }
   });
-  let mailOptions = {
-      // should be replaced with real recipient's account
-      to: 'damjan.oslaj@gmail.com',
-      subject: req.body.subject,
-      body: req.body.message
-  };
-  transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-          return console.log(error);
-      }
-      console.log('Message %s sent: %s', info.messageId, info.response);
+
+  let mSubject = req.body.subject + ' ' + req.body.email;
+  let mBody = String(req.body.message);
+  
+  
+   incDemandCount(req.body.userid, req.body.postid, function(mail){
+    console.log("callback was caleed");
+    console.log({mail});
+   
+    let mailOptions = {
+      to: mail,
+      subject: mSubject,
+      text: mBody
+    };
+    
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message %s sent: %s', info.messageId, info.response);
+    });
+    res.redirect('http://localhost:3000');
+    res.end();
   });
-  res.redirect('http://localhost:3000');
-  res.end();
+  
 });
 
+
+function incDemandCount(userid, postid, callback){
+  
+  User.findOneAndUpdate(
+    { "_id": userid },
+    { new: true },
+    (err, doc) => {
+      if (!err) { 
+       
+        doc.ads.id(postid).demandCount = doc.ads.id(postid).demandCount + 1;
+
+        doc.save(function(err, newDoc){ console.log("ok"); });
+        callback(doc.email);
+        // return String(doc.email);
+        console.log("increased");
+ 
+      } else {
+        console.log('Error during record update : ' + err);
+      }
+    }
+  );
+}
 
 
 module.exports = router;
