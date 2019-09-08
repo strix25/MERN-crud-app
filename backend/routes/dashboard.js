@@ -8,7 +8,7 @@ var ObjectId = require('mongodb').ObjectID;
 
 router.get('/create', function(req, res, next) {
   
-  res.render('create', {page:'create', menuId:'create', userId: req.session.userId});
+  res.render('create', {page:'create', menuId:'create', userId: req.session.userId, session: req.session});
 });
 
 // router.post('/create', function(req, res, next) {
@@ -86,11 +86,11 @@ function insertAdd(req, res) {
 }
 
 router.get('/register', function(req, res) {
-  res.render('register', {page:'register', menuId:'register'});
+  res.render('register', {page:'register', menuId:'register', session:req.session});
 });
 
 router.get('/login', function(req, res) {
-  res.render('login', {page:'login', menuId:'login'});
+  res.render('login', {page:'login', menuId:'login', session: req.session});
 });
 
 
@@ -161,7 +161,7 @@ router.get('/', function (req, res, next) {
             if (!err) {
               // console.log(user);
               let ads = user.ads;
-              return res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:ads});
+              return res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:ads, session:req.session});
             }
             else {
               console.log('Error in retrieving employee list :' + err);
@@ -236,7 +236,7 @@ router.get('/edit/:id', (req, res) => {
     if(!error){
       let add = response.ads.id(req.params.id)
 
-      return res.render('edit', {page:'edit', menuId:'edit', item:add});
+      return res.render('edit', {page:'edit', menuId:'edit', item:add, session: req.session});
     }else{
       console.log(error);
     }

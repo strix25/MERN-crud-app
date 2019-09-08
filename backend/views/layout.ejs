@@ -9,11 +9,16 @@
 
 <div class="dashboard-container">
   <div class="sidebar">
-    <a href="/dashboard">Moji oglasi</a>
-    <a href="/dashboard/create">Dodaj oglas</a>
-    <a href="/dashboard/register">register</a>
-    <a href="/dashboard/login">login</a>
-    <a href="/dashboard/logout">logout</a>
+    
+    <%if(session.userId != undefined && session.userId != ''){%>
+      <a href="/dashboard">Moji oglasi</a>
+      <a href="/dashboard/create">Dodaj oglas</a>
+      <a href="/dashboard/logout">Odjava</a>
+    <%}else{%>
+      <a href="/dashboard/register">Registracija</a>
+      <a href="/dashboard/login">Prijava</a>
+    <%}%>
+    
   </div>
 
   <div class="container-fluid bg-3 text-center">    

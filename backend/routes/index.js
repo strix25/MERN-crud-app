@@ -19,7 +19,7 @@ router.get('/apartment/:userid/:postid', function(req, res, next) {
       if (!err) { 
         var add = doc.ads.id(req.params.postid);
         
-        res.render('apartment', {page:'apartment', menuId:'apartment', data: add});
+        res.render('apartment', {page:'apartment', menuId:'apartment', data: add, session:req.session});
 
         console.log("ok");
  

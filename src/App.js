@@ -43,8 +43,8 @@ class App extends Component {
 
   render() {
     let center = {
-      lat: 48.864716,
-      lng: 2.349014
+      lat: 46.6565789,
+      lng: 16.1636974
     }
 
     if(this.state.selectedFlat){
@@ -58,7 +58,7 @@ class App extends Component {
       <div className="app">
         <div className="navbar">
           <div className="leftside">
-            <i class="fa fa-home" ></i><a href="/">Stanovanja</a>
+            <i className="fa fa-home" ></i><a href="/">Stanovanja</a>
           </div>
           <div className="rightside">
             <a href="//localhost:9000/dashboard">dashboard</a>
