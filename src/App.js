@@ -21,7 +21,6 @@ class App extends Component {
     fetch(url)
       .then(response => response.json())
       .then((data) =>{
-        // console.log(data);
         this.setState({
           flats: data.data,
           allFlats: data.data
@@ -30,7 +29,6 @@ class App extends Component {
   }
 
   selectFlat = (flat) => {
-    //FIXME: tu mogoce
     this.setState({
       selectedFlat: flat
     });

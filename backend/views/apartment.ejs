@@ -1,0 +1,51 @@
+<h1>cyka blyat</h1>
+
+<h2><%=data.name%></h2>
+<p><%=data.body%></p>
+<h3>tip stanovanja: <%=data.apparType%></h3>
+<h3>Regija: <%=data.city%></h3>
+<h3>Cena: <%=data.price%> €</h3>
+
+<h1>glavna slika</h1>
+  <img src="//localhost:9000/<%=data.mainPicture%>" alt="" style="height: 190px;">
+
+  <h1>galerija</h1>
+  
+  <% for(var j=0; j < data.pictures.length; j++) { %>
+    <img src="//localhost:9000/<%=data.pictures[j].path.replace('\\', '/')%>" alt="" style="width:190px;">
+  <%}%>
+
+  <h1>Prednosti: </h1>
+  <%if(data.parking != undefined && data.parking == true){%>
+    <h2>Parking TRUE</h2>
+  <%}else{%>
+    <h2>Parking FALSE</h2>
+  <%}%>
+
+  <%if(data.ac != undefined && data.ac == true){%>
+    <h2>Klima TRUE</h2>
+  <%}else{%>
+    <h2>Klima FALSE</h2>
+  <%}%>
+
+  <%if(data.balcony != undefined && data.balcony == true){%>
+    <h2>balcony TRUE</h2>
+  <%}else{%>
+    <h2>balcony FALSE</h2>
+  <%}%>
+
+  <h1>Pošljite povpraševanje</h1>
+  <form role="form" action="/send-email" method="post">
+    <br style="clear:both">
+    <div class="form-group">
+      <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" value="Povpraševanje: <%=data.name%>">
+      <input type="hidden" class="form-control" name="postid" value="<%=data._id%>">
+      <input type="hidden" class="form-control" name="userid" value="<%=data.userid%>">
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" type="textarea" id="message" name="message" placeholder="Message" maxlength="140" rows="7" required></textarea>
+    </div>
+    <div class="text-center">
+      <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right btn-submit">Send</button>
+    </div>
+  </form>

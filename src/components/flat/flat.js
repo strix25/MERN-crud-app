@@ -10,6 +10,8 @@ export default class Flat extends Component {
     console.log(this.props.flat);
 
     const imgPath = this.props.flat.mainPicture.replace("\\", "/");
+    const postuserid = this.props.flat.userid;
+    const postid = this.props.flat._id;
     const style = {
       backgroundImage: `url('//localhost:9000/${imgPath}')`
     };
@@ -20,7 +22,7 @@ export default class Flat extends Component {
           <div className="flat-picture" style={style}></div>
           <div className="title-container">
             <div className="flat-title">{title}</div>
-            <a href="//localhost:9000/odd/id" className="btn-readmore" rel="noopener noreferrer" target="_blank">
+            <a href={'//localhost:9000/apartment/' + postuserid + '/' + postid} className="btn-readmore" rel="noopener noreferrer" target="_blank">
               več
             </a>
           </div>
