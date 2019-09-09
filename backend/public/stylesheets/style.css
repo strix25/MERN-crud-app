@@ -46,7 +46,8 @@ body {
 }
 
 .sidebar{
-  height: 95vh;
+  flex-shrink: 0;
+  min-height: 95vh;
   width:10%;
   display:flex;
   flex-wrap: wrap;
@@ -131,4 +132,16 @@ body {
   background: #278efd;
   text-decoration: none;
   color: #fff;
+}
+
+input[type="file"]{
+  height: 43px;
+}
+
+li i{
+  color: #bbbbbb;
+}
+
+ul{
+  list-style-type: none;
 }

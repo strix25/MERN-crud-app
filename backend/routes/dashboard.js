@@ -7,15 +7,9 @@ var ObjectId = require('mongodb').ObjectID;
 // const path = require('path');
 
 router.get('/create', function(req, res, next) {
-  
   res.render('create', {page:'create', menuId:'create', userId: req.session.userId, session: req.session});
 });
 
-// router.post('/create', function(req, res, next) {
-  
-//   console.log(req.body);
-//   return res.redirect('/dashboard');
-// });
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -34,14 +28,7 @@ var fields = [
 
 // router.post('/create', upload.array('pictures',3), function (req, res) {
 router.post('/create', upload.fields(fields), function (req, res) {
-  //var imagePath = req.file.path.replace(/^public\//, '');
-  // console.log(req.body);
   insertAdd(req, res);
-
-  // console.log(req.files);
- //remove /public from imagePath TODO:
- 
-
   return res.redirect('/dashboard');
 });
 
@@ -93,13 +80,13 @@ router.get('/login', function(req, res) {
   res.render('login', {page:'login', menuId:'login', session: req.session});
 });
 
-//FIXME:
-//POST route for updating data
+
 router.post('/login', function (req, res, next) {
   
   if (req.body.logemail && req.body.logpassword) {
     //login
     User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
+      console.log({user});
       if (error || !user) {
         var err = new Error('Wrong email or password.');
         err.status = 401;
@@ -115,10 +102,8 @@ router.post('/login', function (req, res, next) {
     return next(err);
   }
 });
-//FIXME:
 
 
-//POST route for updating data
 router.post('/register', function (req, res, next) {
   // confirm that user typed same password twice
   if (req.body.password !== req.body.passwordConf) {
@@ -179,22 +164,19 @@ router.get('/', function (req, res, next) {
         if (user === null) {
           return res.redirect('/dashboard/login');
         } else {
-
-          //FIXME:
+ 
           User.findOne({_id:req.session.userId },(err, user) => {
             if (!err) {
-              // console.log(user);
+              
               let ads = user.ads;
               return res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:ads, session:req.session});
             }
             else {
-              console.log('Error in retrieving employee list :' + err);
+              console.log('Error in retrieving list :' + err);
             }
           });
-          //FIXME:
-
-          // return res.render('dashboard', {page:'Dashboard', menuId:'dashboard', list:list});
-          console.log("shiet");
+       
+          console.log("test");
         }
       }
     });
@@ -252,9 +234,6 @@ router.get('/delete/:id', (req, res) => {
 
 router.get('/edit/:id', (req, res) => {
 
-
-  
-  
   User.findById(req.session.userId, function (error,response) {
     
     if(!error){

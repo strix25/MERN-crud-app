@@ -1,10 +1,15 @@
-<h1>cyka blyat</h1>
 
-<h2><%=data.name%></h2>
-<p><%=data.body%></p>
-<h3>tip stanovanja: <%=data.apparType%> sobno</h3>
-<h3>Regija: <%=data.city%></h3>
-<h3>Cena: <%=data.price%> €</h3>
+<div class="flexcont" style="display: flex;flex-wrap:wrap;text-align:left;">
+<div class="leftside-add" style="width:48%;display: flex;flex-wrap:wrap;min-height: 620px;align-content: flex-start;">
+<h2 style="width:100%;">Oglas: <%=data.name%></h2>
+<h4 style="margin-bottom: 15px;margin-top:20px;">Opis:</h4>
+<p style="display:block;padding:0 2% 0;"><%=data.body%></p>
+<ul>
+    <li>Tip stanovanja: <%=data.apparType%> sobno</li>
+    <li>Regija: <%=data.city%></li>
+    <li style="font-weight: bold;">Cena: <%=data.price%> €</li>
+</ul>
+
 
 <!-- <h1>glavna slika</h1>
   <img src="//localhost:9000/<%=data.mainPicture%>" alt="" style="height: 190px;">
@@ -15,25 +20,28 @@
     <img src="//localhost:9000/<%=data.pictures[j].path.replace('\\', '/')%>" alt="" style="width:190px;">
   <%}%> -->
 
-  <h1>Prednosti: </h1>
-  <%if(data.parking != undefined && data.parking == true){%>
-    <h2>Parking TRUE</h2>
-  <%}else{%>
-    <h2>Parking FALSE</h2>
-  <%}%>
+  <p style="width:100%;margin: 0px 0px 30px 0px;height: 1px;">Dodatno: </p>
+  <ul>
+    <%if(data.parking != undefined && data.parking == true){%>
+      <li><i class="fa fa-check-circle" style="color:#007bff;"></i> Parking </i></li>
+    <%}else{%>
+      <li><i class="fa fa-times-circle"></i> Parking </i></li>
+    <%}%>
 
-  <%if(data.ac != undefined && data.ac == true){%>
-    <h2>Klima TRUE</h2>
-  <%}else{%>
-    <h2>Klima FALSE</h2>
-  <%}%>
+    <%if(data.ac != undefined && data.ac == true){%>
+      <li><i class="fa fa-check-circle" style="color:#007bff;"></i> Klima </i></li>
+    <%}else{%>
+      <li><i class="fa fa-times-circle"></i> Klima </i></li>
+    <%}%>
 
-  <%if(data.balcony != undefined && data.balcony == true){%>
-    <h2>balcony TRUE</h2>
-  <%}else{%>
-    <h2>balcony FALSE</h2>
-  <%}%>
-
+    <%if(data.balcony != undefined && data.balcony == true){%>
+      <li><i class="fa fa-check-circle" style="color:#007bff;"></i> balkon </i></li>
+    <%}else{%>
+      <li><i class="fa fa-times-circle"></i> balkon </i></li>
+    <%}%>
+  </ul>
+</div><!--leftside end-->
+<div class="rightside-add"  style="width:48%;min-height: 620px;">
   <!-- FIXME: -->
   <style>
     * {box-sizing: border-box}
@@ -145,14 +153,14 @@
     
     <div class="mySlides fade">
       <div class="numbertext">1 / <%=data.pictures.length+1%></div>
-      <img src="//localhost:9000/<%=data.mainPicture%>" style="width:100%;max-width: 400px;">
+      <img src="//localhost:9000/<%=data.mainPicture%>" style="width:100%;max-width: 100%;">
       <div class="text"></div>
     </div>
     <% for(var j=0; j < data.pictures.length; j++) { %>
       
       <div class="mySlides fade">
         <div class="numbertext"><%=j+2;%> / <%=data.pictures.length+1%> </div>
-        <img src="//localhost:9000/<%=data.pictures[j].path.replace('\\', '/')%>" style="width:100%;max-width: 400px;">
+        <img src="//localhost:9000/<%=data.pictures[j].path.replace('\\', '/')%>" style="width:100%;max-width: 100%;">
         <div class="text"></div>
       </div>
     <%}%>
@@ -203,7 +211,8 @@
     }
     </script>
   <!-- FIXME: -->
-
+  </div><!--rightside end-->
+  <div class="bottomformcontact" style="margin:auto;">
   <h1>Pošljite povpraševanje</h1>
   <form role="form" action="/send-email" method="post">
     <br style="clear:both">
@@ -219,7 +228,9 @@
     <div class="form-group">
       <textarea class="form-control" type="textarea" id="message" name="message" placeholder="Sporočilo" maxlength="140" rows="7" required></textarea>
     </div>
-    <div class="text-center">
-      <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right btn-submit">Send</button>
+    <div class="text-center" style="display:flex;justify-content: center;margin-bottom:10px;">
+      <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right btn-submit">Pošlji</button>
     </div>
   </form>
+</div>
+</div>

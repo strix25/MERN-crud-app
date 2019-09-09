@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
+
 var UserSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -43,6 +44,7 @@ UserSchema.statics.authenticate = function (email, password, callback) {
   User.findOne({ email: email })
     .exec(function (err, user) {
       if (err) {
+        console.log("helo darkness");
         return callback(err)
       } else if (!user) {
         var err = new Error('User not found.');
@@ -65,6 +67,9 @@ UserSchema.statics.authenticate = function (email, password, callback) {
 //hashing a password before saving it to the database
 UserSchema.pre('save', function (next) {
   var user = this;
+ 
+  if (!user.isModified('password')) return next();
+
   bcrypt.hash(user.password, 10, function (err, hash) {
     if (err) {
       return next(err);
@@ -72,6 +77,8 @@ UserSchema.pre('save', function (next) {
     user.password = hash;
     next();
   })
+  
+  
 });
 
 

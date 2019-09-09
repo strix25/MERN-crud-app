@@ -2,14 +2,14 @@
 var regions = ["Notranjska","Podravska","Pomurska","Gorenjska","Primorska","Savinjska","Koroška","Dolenjska","Posavska","Zasavska"];
 
 %>
-<h3>this is edit</h3>
-<form class="form-signin" method="POST" action="/dashboard/edit/<%=String(item._id)%>" enctype="multipart/form-data">
+
+<form class="form-signin" method="POST" action="/dashboard/edit/<%=String(item._id)%>" enctype="multipart/form-data" style="display:flex;flex-wrap:wrap;width:60%;">
   
-  <h1 class="h3 mb-3 font-weight-normal">edit</h1>
+  <h1 class="h3 mb-3 font-weight-normal" style="width:100%;">Uredi oglas:</h1>
 
-
+  <div class="leftSideForm" style="width: 47%;">
   <label for="name" class="sr-only">naslov</label>
-  <input type="text" style="margin-bottom:10px;" id="name" name="name" class="form-control" value="<%=item.name%>" placeholder="naziv" required autofocus="">
+  <input type="text" style="margin-bottom:10px;margin-top: 5px;" id="name" name="name" class="form-control" value="<%=item.name%>" placeholder="naziv" required autofocus="">
 
   <label for="price" class="sr-only">Cena</label>
   <input type="number" style="margin-bottom:10px;" id="price" name="price" class="form-control" placeholder="Cena" value="<%=item.price%>" required autofocus="">
@@ -37,24 +37,28 @@ var regions = ["Notranjska","Podravska","Pomurska","Gorenjska","Primorska","Savi
     <%}%>
   </select>
 
-  <div class="checkbox mb-3" >
-    <input type="checkbox" name="ac" value="1" <%if(item.ac){%> checked <%}%> > Klima<br>
-    <input type="checkbox" name="parking" value="1" <%if(item.parking){%> checked <%}%>> Prostor za parkiranje<br>
-    <input type="checkbox" name="balcony" value="1" <%if(item.balcony){%> checked <%}%>> Balkon<br>
+  <div class="checkbox mb-3" style="display:flex;flex-wrap:wrap;">
+    <div class="centerMe" style="margin:auto;display:flex;flex-wrap:wrap;align-items:center;">
+      <input type="checkbox"  name="ac" value="1" <%if(item.ac){%> checked <%}%> > Klima<br>
+      <input type="checkbox" style="margin-left:20px;"  name="parking" value="1" <%if(item.parking){%> checked <%}%>> Prostor za parkiranje<br>
+      <input type="checkbox" style="margin-left:20px;"  name="balcony" value="1" <%if(item.balcony){%> checked <%}%>> Balkon<br>
+    </div>
   </div>
-
-  
-  <label for="pictures" class="">Izberite glavno sliko</label>
+</div><!--FIXME: left side end-->
+  <div class="rightsideform" style="width: 47%;display:flex;flex-wrap:wrap;margin-left:6%;">
+  <label for="pictures" class="" style="font-weight: bold;">Izberite glavno sliko</label>
   <input type="file" multiple style="margin-bottom:10px;" id="mainpic" name="mainpic" class="form-control" >
   <img src="//localhost:9000/<%=item.mainPicture%>" alt="" style="height: 190px;">
 
-  <label for="pictures" class="">Izberite slike za gelerijo</label>
+  <label for="pictures" class="" style="font-weight: bold;">Izberite slike za gelerijo</label>
   <input type="file" multiple style="margin-bottom:10px;" id="pictures" name="pictures" class="form-control" >
-  
+
+  <div class="smallGalery" style="display:flex;flex-wrap: wrap;justify-content: space-between;">
   <% for(var j=0; j < item.pictures.length; j++) { %>
     <%console.log(item.pictures[j].path);%>
-    <img src="//localhost:9000/<%=item.pictures[j].path.replace('\\', '/')%>" alt="" style="width:190px;">
+    <img src="//localhost:9000/<%=item.pictures[j].path.replace('\\', '/')%>" alt="" style="width:49%;margin-top:2%;">
   <%}%>
-
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Posodobi oglas</button>
+  </div>
+  </div><!--FIXME: right side end-->
+  <button class="btn btn-lg btn-primary btn-block" type="submit" style="width:30%;margin:3% auto 0;">Posodobi oglas</button>
 </form>

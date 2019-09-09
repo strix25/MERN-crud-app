@@ -10,7 +10,6 @@ body{
   display: flex;
   flex-direction: column;
   margin-left: calc(10% + 30px);
-  margin-top: 5vh;
   overflow: hidden;
 }
 .search{
