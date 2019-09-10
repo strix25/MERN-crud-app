@@ -4,6 +4,7 @@ import Flat from './components/flat/flat';
 import GoogleMapReact from 'google-map-react';
 import Marker from './components/marker/marker';
 
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -11,7 +12,10 @@ class App extends Component {
       flats: [],
       allFlats: [],
       selectedFlat: null,
-      search: ""
+      search: "",
+      filterCity: [],
+      filterApparType: [],
+      filterMore: []
     };
   }
 
@@ -35,17 +39,121 @@ class App extends Component {
   }
 
   handleSearch = (event) => {
+    //ponastavi
+    let inputs = document.querySelectorAll("input[type='checkbox']");
+    for(let i = 0; i < inputs.length; i++) {
+        inputs[i].checked = false;   
+    }
+
     this.setState({
       search: event.target.value,
       flats: this.state.allFlats.filter((flat) => new RegExp(event.target.value, "i").exec(flat.name))
     })
   }
 
+  filterMaster = () => {
+    this.setState({
+      search: ""
+    })
+    console.log(document.getElementById('search'));
+  //  let test = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city) && this.state.filterApparType.includes(flat.apparType));
+  if(this.state.filterCity.length === 0){
+    this.setState({
+      flats: this.state.allFlats
+    })
+  }else{
+    let test = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city));
+    
+    this.setState({
+     flats: test
+   });
+
+   //set search value to ''
+   
+  }
+
+  
+  }
+
+
+  handleCity = (e) => {
+    // current array of options
+    const options = this.state.filterCity;
+    let index;
+
+    // check if the check box is checked or unchecked
+    if (e.target.checked) {
+      // add the numerical value of the checkbox to options array
+      options.push(e.target.value)
+    } else {
+      // or remove the value from the unchecked checkbox from the array
+      index = options.indexOf(e.target.value)
+      options.splice(index, 1)
+    }
+
+    // sort the array
+    options.sort();    
+
+    // update the state with the new array of options
+    this.setState({ filterCity: options });
+      
+    this.filterMaster(); 
+  }
+
+  handleApparType = (e) => {
+    // current array of options
+    const options = this.state.filterApparType;
+    let index;
+
+    // check if the check box is checked or unchecked
+    if (e.target.checked) {
+      // add the numerical value of the checkbox to options array
+      options.push(+e.target.value)
+    } else {
+      // or remove the value from the unchecked checkbox from the array
+      index = options.indexOf(+e.target.value)
+      options.splice(index, 1)
+    }
+
+    // sort the array
+    options.sort();    
+
+    // update the state with the new array of options
+    this.setState({ filterApparType: options });
+
+    this.filterMaster();
+  }
+
+  handleMore= (e) => {
+     // current array of options
+     const options = this.state.filterMore;
+     let index;
+     console.log(e.target.value);
+     // check if the check box is checked or unchecked
+     if (e.target.checked) {
+       // add the numerical value of the checkbox to options array
+       options.push(e.target.value)
+     } else {
+       // or remove the value from the unchecked checkbox from the array
+       index = options.indexOf(e.target.value)
+       options.splice(index, 1)
+     }
+ 
+     // sort the array
+     options.sort();    
+ 
+     // update the state with the new array of options
+     this.setState({ filterMore: options });
+  }
+
+  
   render() {
     let center = {
       lat: 46.6565789,
       lng: 16.1636974
     }
+
+    
 
     if(this.state.selectedFlat){
       center = {
@@ -67,27 +175,36 @@ class App extends Component {
         
         <div className="sidebar">
           <h2>Kraj</h2>
-          <label><input type="checkbox" name="favorite_pet" value="Cats"></input>Murska Sobota</label>   
-          <label><input type="checkbox" name="favorite_pet" value="Dogs"></input>Maribor</label>         
-          <label><input type="checkbox" name="favorite_pet" value="Birds"></input>Ljubljana</label>      
+          <label><input type="checkbox" onChange={this.handleCity} name="Notranjska" value="Notranjska"></input>Notranjska</label>   
+          <label><input type="checkbox" onChange={this.handleCity} name="Podravska" value="Podravska"></input>Podravska</label>         
+          <label><input type="checkbox" onChange={this.handleCity} name="Pomurska" value="Pomurska"></input>Pomurska</label>      
+          <label><input type="checkbox" onChange={this.handleCity} name="Gorenjska" value="Gorenjska"></input>Gorenjska</label>   
+          <label><input type="checkbox" onChange={this.handleCity} name="Primorska" value="Primorska"></input>Primorska</label>         
+          <label><input type="checkbox" onChange={this.handleCity} name="Savinjska" value="Savinjska"></input>Savinjska</label>      
+          <label><input type="checkbox" onChange={this.handleCity} name="Koroška" value="Koroška"></input>Koroška</label>   
+          <label><input type="checkbox" onChange={this.handleCity} name="Dolenjska" value="Dolenjska"></input>Dolenjska</label>         
+          <label><input type="checkbox" onChange={this.handleCity} name="Posavska" value="Posavska"></input>Posavska</label>      
+          <label><input type="checkbox" onChange={this.handleCity} name="Zasavska" value="Zasavska"></input>Zasavska</label>      
   
           <h2>Tip</h2>
-          <label><input type="checkbox" name="favorite_pet" value="Cats"></input>1 sobno</label>   
-          <label><input type="checkbox" name="favorite_pet" value="Dogs"></input>2 sobno</label>         
-          <label><input type="checkbox" name="favorite_pet" value="Birds"></input>3 sobno</label>
-          <label><input type="checkbox" name="favorite_pet" value="Birds"></input>4 sobno</label>
+          <label><input type="checkbox" onChange={this.handleApparType} name="apparType1" value="1"></input>1 sobno</label>   
+          <label><input type="checkbox" onChange={this.handleApparType} name="apparType2" value="2"></input>2 sobno</label>         
+          <label><input type="checkbox" onChange={this.handleApparType} name="apparType3" value="3"></input>3 sobno</label>
+          <label><input type="checkbox" onChange={this.handleApparType} name="apparType4" value="4"></input>4 sobno</label>
 
           <h2>Dodatno</h2>
-          <label><input type="checkbox" name="favorite_pet" value="Cats"></input>klima</label>   
-          <label><input type="checkbox" name="favorite_pet" value="Dogs"></input>parking</label>         
-          <label><input type="checkbox" name="favorite_pet" value="Birds"></input>balkon</label>
+          <label><input type="checkbox" onChange={this.handleMore} name="ac" value="ac"></input>klima</label>   
+          <label><input type="checkbox" onChange={this.handleMore} name="parking" value="parking"></input>parking</label>         
+          <label><input type="checkbox" onChange={this.handleMore} name="balcony" value="Birds"></input>balkon</label>
         
+
 
         </div>
         <div className="main">
           <div className="search">
             <input 
-            type="text" 
+            type="text"
+            id="search" 
             placeholder="Search..." 
             value={this.state.search} 
             onChange={this.handleSearch} />

@@ -7,7 +7,6 @@ export default class Flat extends Component {
   }
   render() {
     const title = this.props.flat.price + "€" + " - " + this.props.flat.name;
-    console.log(this.props.flat);
 
     const imgPath = this.props.flat.mainPicture.replace("\\", "/");
     const postuserid = this.props.flat.userid;
