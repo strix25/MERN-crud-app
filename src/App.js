@@ -55,50 +55,39 @@ class App extends Component {
     this.setState({
       search: ""
     })
-    
-    //TODO:start
-    //  let test = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city) && this.state.filterApparType.includes(flat.apparType));
-    // // // if(this.state.filterCity.length === 0){
-    // // //   this.setState({
-    // // //     flats: this.state.allFlats
-    // // //   });
-    // // // }else{
-    // // //   let filteredFlats = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city));
-    
-    // // //   this.setState({
-    // // //    flats: filteredFlats
-    // // //   });
-    // // // }
-    //TODO: end
-    //FIXME:
-    if(this.state.filterCity.length === 0 && this.state.filterApparType.length === 0){
+ 
+    if(this.state.filterCity.length === 0 && this.state.filterApparType.length === 0)
+    {
       //ponastavi filter
       this.setState({
         flats: this.state.allFlats
       });
-    }else if(this.state.filterCity.length !== 0 && this.state.filterApparType.length === 0){
+    }
+    else if(this.state.filterCity.length !== 0 && this.state.filterApparType.length === 0)
+    {
       //filtriraj po filterCity
       let filteredFlats = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city));
-    
-      this.setState({
-       flats: filteredFlats
-      });
-    }else if(this.state.filterCity.length === 0 && this.state.filterApparType.length !== 0){
-      //filtriraj po filterApparType
-      let filteredFlats = this.state.allFlats.filter(flat => this.state.filterApparType.includes(flat.apparType));
-    
-      this.setState({
-       flats: filteredFlats
-      });
-    }else{
-      //Filtriraj po obema
-      let filteredFlats = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city) && this.state.filterApparType.includes(flat.apparType));
-    
       this.setState({
        flats: filteredFlats
       });
     }
-    //FIXME:
+    else if(this.state.filterCity.length === 0 && this.state.filterApparType.length !== 0)
+    {
+      //filtriraj po filterApparType
+      let filteredFlats = this.state.allFlats.filter(flat => this.state.filterApparType.includes(flat.apparType));
+      this.setState({
+       flats: filteredFlats
+      });
+    }
+    else
+    {
+      //Filtriraj po obema
+      let filteredFlats = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city) && this.state.filterApparType.includes(flat.apparType));
+      this.setState({
+       flats: filteredFlats
+      });
+    }
+
   }
 
 
