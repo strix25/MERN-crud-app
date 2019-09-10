@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   handleSearch = (event) => {
-    //ponastavi
+    //ponastavi checkbox-e
     let inputs = document.querySelectorAll("input[type='checkbox']");
     for(let i = 0; i < inputs.length; i++) {
         inputs[i].checked = false;   
@@ -55,24 +55,50 @@ class App extends Component {
     this.setState({
       search: ""
     })
-    console.log(document.getElementById('search'));
-  //  let test = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city) && this.state.filterApparType.includes(flat.apparType));
-  if(this.state.filterCity.length === 0){
-    this.setState({
-      flats: this.state.allFlats
-    })
-  }else{
-    let test = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city));
     
-    this.setState({
-     flats: test
-   });
-
-   //set search value to ''
-   
-  }
-
-  
+    //TODO:start
+    //  let test = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city) && this.state.filterApparType.includes(flat.apparType));
+    // // // if(this.state.filterCity.length === 0){
+    // // //   this.setState({
+    // // //     flats: this.state.allFlats
+    // // //   });
+    // // // }else{
+    // // //   let filteredFlats = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city));
+    
+    // // //   this.setState({
+    // // //    flats: filteredFlats
+    // // //   });
+    // // // }
+    //TODO: end
+    //FIXME:
+    if(this.state.filterCity.length === 0 && this.state.filterApparType.length === 0){
+      //ponastavi filter
+      this.setState({
+        flats: this.state.allFlats
+      });
+    }else if(this.state.filterCity.length !== 0 && this.state.filterApparType.length === 0){
+      //filtriraj po filterCity
+      let filteredFlats = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city));
+    
+      this.setState({
+       flats: filteredFlats
+      });
+    }else if(this.state.filterCity.length === 0 && this.state.filterApparType.length !== 0){
+      //filtriraj po filterApparType
+      let filteredFlats = this.state.allFlats.filter(flat => this.state.filterApparType.includes(flat.apparType));
+    
+      this.setState({
+       flats: filteredFlats
+      });
+    }else{
+      //Filtriraj po obema
+      let filteredFlats = this.state.allFlats.filter(flat => this.state.filterCity.includes(flat.city) && this.state.filterApparType.includes(flat.apparType));
+    
+      this.setState({
+       flats: filteredFlats
+      });
+    }
+    //FIXME:
   }
 
 
@@ -108,10 +134,10 @@ class App extends Component {
     // check if the check box is checked or unchecked
     if (e.target.checked) {
       // add the numerical value of the checkbox to options array
-      options.push(+e.target.value)
+      options.push(e.target.value)
     } else {
       // or remove the value from the unchecked checkbox from the array
-      index = options.indexOf(+e.target.value)
+      index = options.indexOf(e.target.value)
       options.splice(index, 1)
     }
 
@@ -122,28 +148,6 @@ class App extends Component {
     this.setState({ filterApparType: options });
 
     this.filterMaster();
-  }
-
-  handleMore= (e) => {
-     // current array of options
-     const options = this.state.filterMore;
-     let index;
-     console.log(e.target.value);
-     // check if the check box is checked or unchecked
-     if (e.target.checked) {
-       // add the numerical value of the checkbox to options array
-       options.push(e.target.value)
-     } else {
-       // or remove the value from the unchecked checkbox from the array
-       index = options.indexOf(e.target.value)
-       options.splice(index, 1)
-     }
- 
-     // sort the array
-     options.sort();    
- 
-     // update the state with the new array of options
-     this.setState({ filterMore: options });
   }
 
   
@@ -191,11 +195,6 @@ class App extends Component {
           <label><input type="checkbox" onChange={this.handleApparType} name="apparType2" value="2"></input>2 sobno</label>         
           <label><input type="checkbox" onChange={this.handleApparType} name="apparType3" value="3"></input>3 sobno</label>
           <label><input type="checkbox" onChange={this.handleApparType} name="apparType4" value="4"></input>4 sobno</label>
-
-          <h2>Dodatno</h2>
-          <label><input type="checkbox" onChange={this.handleMore} name="ac" value="ac"></input>klima</label>   
-          <label><input type="checkbox" onChange={this.handleMore} name="parking" value="parking"></input>parking</label>         
-          <label><input type="checkbox" onChange={this.handleMore} name="balcony" value="Birds"></input>balkon</label>
         
 
 
