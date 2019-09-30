@@ -162,7 +162,7 @@ class App extends Component {
             <i className="fa fa-home" ></i><a href="/">Stanovanja</a>
           </div>
           <div className="rightside">
-            <a href="//localhost:9000/dashboard">dashboard</a>
+            <a href="//localhost:9000/dashboard">Nadzorna plošča</a>
           </div>
         </div>
         
@@ -184,9 +184,6 @@ class App extends Component {
           <label><input type="checkbox" onChange={this.handleApparType} name="apparType2" value="2"></input>2 sobno</label>         
           <label><input type="checkbox" onChange={this.handleApparType} name="apparType3" value="3"></input>3 sobno</label>
           <label><input type="checkbox" onChange={this.handleApparType} name="apparType4" value="4"></input>4 sobno</label>
-        
-
-
         </div>
         <div className="main">
           <div className="search">

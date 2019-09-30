@@ -24,8 +24,7 @@ export default class Flat extends Component {
             <a href={'//localhost:9000/apartment/' + postuserid + '/' + postid} className="btn-readmore" rel="noopener noreferrer" target="_blank">
               več
             </a>
-          </div>
-          
+          </div> 
         </div>
       
     );
