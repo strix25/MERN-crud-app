@@ -38,8 +38,8 @@ router.post('/send-email', function (req, res) {
       secure: true,
       auth: {
           // should be replaced with real sender's account
-          user: 'levlion2525@gmail.com',
-          pass: 'diplomadamjan123'
+          user: 'your@mail.com',
+          pass: 'yourpassword'
       }
   });
 
